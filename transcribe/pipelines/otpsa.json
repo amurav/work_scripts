@@ -1,0 +1,108 @@
+{
+  "id": "otpsa",
+  "name": "otpsa",
+  "index": "spa_615466b9df838f354f08f01c",
+  "processors": [
+    {
+      "type": "builtin",
+      "channels": [],
+      "name": "update-index",
+      "config": {
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "check-unique",
+      "config": {
+        "query_fields": [
+          "session_id"
+        ]
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "upload-to-storage",
+      "channels": ["voice"],
+      "config": {
+        "storage": {
+          "url": "http://10.90.0.52:8050/api/storage/upload"
+        }
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "downloader",
+      "channels": ["voice"],
+      "config": {
+        "storage": {
+          "url": "http://10.90.0.52:8050/api/storage/download"
+        },
+        "retry": {
+          "initial_delay": 3,
+          "amount": 10,
+          "delay": 5
+        }
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "dc-call",
+      "config": {
+        "agent_channel_number": 1,
+        "owner": [],
+        "dont_stt_bot_dialog": true
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "stt",
+      "channels": ["voice"],
+      "config": {
+        "agent_channel_number": 1,
+        "processing": {
+          "data_in_request_filed": "stt_data"
+        },
+        "server": {
+          "url": "http://192.168.90.30:8091/api/v2/stt/ru-ru?token=f2861a55-9e88-43ff-bfeb-7410df63e2c6",
+          "username": "spitchdev",
+          "password": "spitch*20",
+          "audio_field_name": "upload_file",
+          "timeout": 300
+        }
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "speech-metrics",
+      "config": {
+        "interrupt_threshhold": 2,
+        "overlap_threshold": 1
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "lemmatizer",
+      "config": {
+        "agent": true,
+        "client": true,
+        "both": true,
+        "steps": true
+      }
+    },
+    {
+      "type": "builtin",
+      "channels": [],
+      "name": "join-segments",
+      "disabled": true,
+      "config": {
+        "wait_timeout": 7200
+      }
+    },
+    {
+      "type": "builtin",
+      "name": "cleanup",
+      "config": {
+      }
+    }
+  ]
+}

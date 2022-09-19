@@ -1,0 +1,18 @@
+    {
+      "type": "builtin",
+      "name": "stt",
+      "channels": ["voice"],
+      "config": {
+        "agent_channel_number": 1,
+        "processing": {
+          "data_in_request_filed": "stt_data"
+        },
+        "server": {
+          "url": "${INDEXER_CFG_STT_SERVER_URL_RU:INDEXER_CFG_STT_SERVER_URL}",
+          "username": "${INDEXER_CFG_STT_SERVER_USERNAME}",
+          "password": "${INDEXER_CFG_STT_SERVER_PASSWORD}",
+          "audio_field_name": "upload_file",
+          "timeout": 300
+        }
+      }
+    },
